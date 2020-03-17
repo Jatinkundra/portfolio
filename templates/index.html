@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html lang="en">
+
+<head>
+  <title>Harshdeep Singh</title>
+
+
+  <meta charset="utf-8">
+  <meta name="viewport" http-equiv="ScreenOrientation" content="width=device-width, initial-scale=1 user-scalable=no, autoRotate:disabled">
+
+  <link rel="stylesheet" type="text/css" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.carousel.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'OwlCarousel2-2.3.4/dist/assets/owl.theme.default.min.css' %}">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+  <link href="https://fonts.googleapis.com/css?family=Merriweather" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/projects_1.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'css/style_1.css' %}">
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
+</head>
+
+<body onload="appearModal()" style="color: #fff;">
+  <div class="main" style="background: #135eb5;">
+    <div class="perm_header" align="right">
+
+      <div class="row perm_header_row">
+        <div class="col-lg-3 col-sm-6" align="left">
+          <div class="perm_header_left"><a href="{% url 'credentials:index' %}" class="name_a" style ="color: #fff;">{{candidate.name}}</a>
+          </div>
+        </div>
+        <div class="col-lg-6 col-sm-0" align="center">
+          <div class="perm_header_center trans">
+            <div class="row">
+              <div class="col-3" align="center" style="">
+                <a class="js-open-main_tab_1" href="#"><button style="background: #EAF0F1; color: #000;">Qualifications</button></a>
+              </div>
+              <div class="col-3" align="center" style="">
+                <a class="js-open-main_tab_2" href="#"><button style="background: #EAF0F1; color: #000;">Expertise</button></a>
+              </div>
+              <div class="col-3" align="center" style="">
+                <a class="js-open-main_tab_3" href="#"><button style= "background: #EAF0F1; color: #000;">Projects</button></a>
+              </div>
+              <div class="col-3" align="center" style="">
+                <a class="js-open-main_tab_4" href="#"><button style= "background: #EAF0F1; color: #000;">Vision</button></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-3 col-sm-6" align="right">
+          <div class="perm_header_right">
+            <div class="row">
+              <div class="col-lg-4 col-sm-1">
+              </div>
+              <div class="col-lg-3 col-sm-4">
+                <a href="{{ candidate.resume_pdf.url }}" target="_blank"><button style= "background: #EAF0F1; color: #000;">Resume</button></a>
+              </div>
+              <div class="col-1">
+              </div>
+              <div class="col-lg-3 col-sm-5">
+                <a href="{% url 'emails:getReceiver' %}"><button style= "background: #EAF0F1; color: #000;">Drive</button></a>
+              </div>
+              <div class="col-1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+
+      <div class="navigation" style="background-color: #135eb5;">
+        <span style="color: #fff;"><a href="{% url 'credentials:index' %}" class="mobile_name">{{candidate.name}}</a></span>
+        <input type="checkbox" class="navigation__checkbox" id="navi-toggle">
+
+        <label for="navi-toggle" class="navigation__button" onclick="clickCount()">
+          <span class="navigation__icon">&nbsp;</span>
+        </label>
+
+        <div class="navigation__background">&nbsp;</div>
+        <nav class="navigation__nav" style="background-color: #135eb5;">
+          <ul class="navigation__list">
+            <li class="navigation__item"><a href="#" onclick="close_btn()" class="navigation__link js-open-main_tab_1"
+                style="display: none;">Qualifications</a></li>
+            <li class="navigation__item"><a href="#" onclick="close_btn()" class="navigation__link js-open-main_tab_2"
+                style="display: none;" >Expertise</a></li>
+            <li class="navigation__item"><a href="#" onclick="close_btn()" class="navigation__link js-open-main_tab_3"
+                style="display: none; background: #EAF0F1; color: #000;">Projects</a></li>
+            <li class="navigation__item"><a href="#" onclick="close_btn()" class="navigation__link js-open-main_tab_4"
+                style="display: none;">Vision & Mission</a></li>
+            <li class="navigation__item"><a href="{{ candidate.resume_pdf.url }}" onclick="close_btn()"
+                target="_blank" class="navigation__link resume__link" style="display: none;">Resume</a></li>
+            <li class="navigation__item"><a href="{% url 'emails:getReceiver' %}" onclick="close_btn()"
+                class="navigation__link drive__link" style="display: none;">Drive Link</a></li>
+
+          </ul>
+        </nav>
+      </div>
+    </div>
+
+
+    <center>
+      <div class="main_content">
+        <div class="row main_content_row">
+          <div class="col-2" align="left">
+          </div>
+          <div class="col-8" align="center">
+
+            <div class="welcome_text row">
+              <div class="col-12" align='center'>
+                <span align='center' class="welcome_span">Welcome To My Portfolio!!</span>
+                <button data-toggle="modal" data-target="#formModal" id="modalButton" hidden></button>
+              </div>
+            </div>
+
+            <div class="tab_links trans">
+              <div class="row">
+                <div class="col-lg-3 col-md-4 col-sm-6 tab_link_single trans" align="center">
+                  <a class="js-open-main_tab_1" href="#"><button style= "background: #EAF0F1; color: #000;">Qualifications</button></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 tab_link_single trans" align="center" style="">
+                  <a class="js-open-main_tab_2" href="#"><button style= "background: #EAF0F1; color: #000;">Expertise</button></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 tab_link_single trans" align="center" style="">
+                  <a class="js-open-main_tab_3" href="#"><button style= "background: #EAF0F1; color: #000;">Projects</button></a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-sm-6 tab_link_single trans" align="center" style="">
+                  <a class="js-open-main_tab_4" href="#"><button style= "background: #EAF0F1; color: #000;">Vision</button></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-2" align="right">
+          </div>
+        </div>
+      </div>
+    </center>
+    <div class="row extra_div" style= "background: #135eb5;"></div>
+
+    <div class="footer">
+      <div class="row">
+        <div class="col-4" align="left">
+          <div class="footer_left">
+            <div class="row">
+
+
+              <div class="col-xs-3 temp_1" style="margin-left: 0; padding-left: 0;"><a href="{{candidate.skype}}"
+                  target="_blank"><i class="fab fa-skype"  style= "color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_2" style="margin-left: 0; padding-left: 0;"><a href="{{candidate.linkedin}}"
+                  target="_blank"><i class="fab fa-linkedin"  style= "color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_3" style="margin-left: 0; padding-left: 0;"><a href="{{candidate.twitter}}"
+                  target="_blank"><i class="fab fa-twitter"  style= "color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_4" style="margin-left: 0; padding-left: 0;"><a href="{{candidate.github}}"
+                  target="_blank"><i class="fab fa-github-square"  style= "color: #fff;"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-4 copyright_name">
+          <div class="footer_center" align="center">
+            <span style="font-size: 18px; color: #fff;"><strong>&copy; Harshdeep Singh</strong></span>
+          </div>
+        </div>
+        <div class="col-4" align="right">
+          <div class="footer_right">
+            <div class="row">
+              <div class="col-11" align="center" style= "color: #fff;">
+                Contact: <span class="contact" style="color: #fff;">{{candidate.contact}}</span>
+              </div>
+              <div class="col-1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="all_tabs main_tab_1 " style= "background: #135eb5;">
+    <div class="tab_1_header">
+      <div class="row">
+        <div class="col-12" align="center">
+          <div class="tab_1_text">QUALIFICATIONS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab_1_content">
+      <div class="row row_tab_content">
+        <div class="col-2" align="left">
+        </div>
+        <div class="col-8" align="center">
+          <div class="row owl-carousel owl-theme">
+            {% for qual in qualifications %}
+
+            <div class="col-12 card">
+              {% include '_qualifications.html' %}
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-2" align="right">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="all_tabs main_tab_2"  style= "background: #135eb5;">
+    <div class="tab_2_header">
+      <div class="row">
+        <div class="col-12" align="center">
+          <div class="tab_2_text">EXPERTISE</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab_2_content">
+      <div class="row row_tab_content">
+        <div class="col-2" align="left">
+        </div>
+        <div class="col-8" align="center">
+          <div class="row owl-carousel owl-theme">
+            {% for exp in expertise %}
+
+            <div class="col-12 card item">
+              {% include '_expertise.html' %}
+            </div>
+
+
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-2" align="right">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="all_tabs main_tab_3"  style= "background: #135eb5;">
+    <div class="tab_3_header">
+      <div class="row">
+        <div class="col-12" align="center">
+          <div class="tab_3_text">PROJECTS</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tab_3_content">
+      <div class="row row_tab_content">
+        <div class="col-2" align="left">
+        </div>
+        <div class="col-8" align="center">
+          <div class="row owl-carousel owl-theme">
+            {% for pro in projects %}
+
+            <div class="col-12 card item">
+              {% include '_projects.html' %}
+            </div>
+
+            {% endfor %}
+          </div>
+        </div>
+        <div class="col-2" align="right">
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+  <div class="all_tabs main_tab_4"  style= "background: #135eb5;">
+    <div class="tab_4_header">
+      <div class="row">
+        <div class="col-12" align="center">
+
+        </div>
+      </div>
+    </div>
+
+    <div class="tab_4_content">
+      <div class="row row_tab_content">
+        <div class="col-1"></div>
+        <div class="col-lg-5 col-sm-10 left_section" align="center">
+          <strong> Vision</strong>
+          <p class="lead" style="text-align: justify; padding: 40px">
+              My vision is to build a sustainable society through education, which is centered around extensive learning, research and development.
+              I wish to be recognised as a leader committed to excellence in youth empowerment, and to give the society the power to innovate and
+              discover countless possibilities through innovative learning and exposure.
+          </p>
+        </div>
+        <div class="col-lg-5 col-sm-10 right_section" align="center">
+          <strong>Mission</strong>
+          <p class="lead" style="text-align: justify; padding: 40px">The mission I seek in the future is to expand my horizon beyond acceptables limits to be a change and hence bring out a change in society through technical interventions,
+          and harnessing the power that resides in the youth which has enough caliber to revolutionlize the world.
+
+
+          </p>
+        </div>
+        <div class="col-1"></div>
+
+
+      </div>
+    </div>
+    <div class="footer footer_vision">
+      <div class="row">
+        <div class="col-4" align="left">
+          <div class="footer_left footer_left_vision">
+            <div class="row">
+
+
+              <div class="col-xs-3 temp_1" style="margin-left: 0; padding-left: 0; margin-top: 25px;"><a href="{{candidate.skype}}"
+                  target="_blank"><i class="fab fa-skype" style="color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_2" style="margin-left: 0; padding-left: 0; margin-top: 25px;"><a href="{{candidate.linkedin}}"
+                  target="_blank"><i class="fab fa-linkedin" style="color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_3" style="margin-left: 0; padding-left: 0; margin-top: 25px;"><a href="{{candidate.twitter}}"
+                  target="_blank"><i class="fab fa-twitter"style= "color: #fff;"></i></a>
+              </div>
+              &nbsp;&nbsp;&nbsp;
+              <div class="col-xs-3 temp_4" style="margin-left: 0; padding-left: 0; margin-top: 25px;"><a href="{{candidate.github}}"
+                  target="_blank"><i class="fab fa-github-square" style= "color: #fff;"></i></a>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-4 copyright_name">
+          <div class="footer_center" align="center">
+            <span style="font-size: 18px;">&copy;</span> Harshdeep Singh
+          </div>
+        </div>
+        <div class="col-4" align="right">
+          <div class="footer_right">
+            <div class="row">
+              <div class="col-11" align="center">
+                Contact: <span class="contact">{{candidate.contact}}</span>
+              </div>
+              <div class="col-1">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="modal fade" data-backdrop="false" id="formModal">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Get Drive Link</h5>
+          <a href="{% url 'credentials:index' %}"><button type="button" class="close" id="close_model"><span id="model_span">&times;</span></button></a>
+        </div>
+        <div class="modal-body">
+          <p>Please enter your Email ID to get the drive link. Please wait till the window loads.</p>
+          <!--<form action="{% url 'emails:getReceiver' %}" method="POST">-->
+            {% comment %}{% csrf_token %}{% endcomment %}
+            <!--{{form.email_id}}&nbsp;&nbsp;&nbsp;&nbsp;-->
+
+            <label>Email ID :&nbsp;&nbsp;&nbsp;&nbsp;</label>
+
+            <input type="email" name="email_receiver" id="receiver">
+
+
+
+
+            <!--CHANGED HERE-->
+            <!--<input type="submit" name="Submit" value="Get Link">-->
+
+
+          <!--</form>-->
+
+            <button onclick="sendmail()">Get Link</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script type="text/javascript" src="{% static 'OwlCarousel2-2.3.4/docs/assets/vendors/jquery.min.js' %}">
+  </script>
+  <script type="text/javascript" src="{% static 'OwlCarousel2-2.3.4/dist/owl.carousel.js' %}"></script>
+  <script type="text/javascript">
+    $('.owl-carousel').owlCarousel({
+      loop: true,
+      margin: 10,
+      nav: true,
+      navText: ["<i class='fas fa-chevron-left'></i>", "<i class='fas fa-chevron-right'></i>"],
+      responsive: {
+        0: {
+          items: 1
+        },
+        600: {
+          items: 2
+        },
+        1000: {
+          items: 3
+        }
+      }
+    });
+  </script>
+  <script src="http://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+    integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+    integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+    crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+    crossorigin="anonymous"></script>
+
+  <script type="text/javascript" src="{% static 'js/index_1.js' %}"></script>
+  <script type="text/javascript">
+        function sendmail()
+        {
+            var receiver = document.getElementById('receiver').value;
+            var url = `https://harshdeepsingh.herokuapp.com/send/${receiver}/`;
+            myWindow = window.open(url, "_blank", "width=500, height=300, left=400, top=200");
+            // window.focus();
+            setTimeout(function() { myWindow.close();}, 5000);
+            setTimeout(function() { document.getElementById('close_model').click();
+                document.getElementById('model_span').click();
+            }, 5200);
+        }
+    </script>
+</body>
+
+</html>
